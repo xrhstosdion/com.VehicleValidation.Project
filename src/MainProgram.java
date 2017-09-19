@@ -4,12 +4,10 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.text.ParseException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class MainProgram {
 
@@ -25,10 +23,10 @@ public class MainProgram {
 
         LocalDate localDate = LocalDate.now();
 
-        Date datenow = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
 
-        System.out.println(localDate);
-        System.out.println(datenow);
+
+
+        System.out.println(LocalDate.now());
 
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
 
@@ -53,9 +51,9 @@ public class MainProgram {
                 Date date = df.parse(info[3]);
 
                 // Elegxos an h hmerominia einai prin thn shmerinh hmerominia
-                 if (date.before(datenow)){
+                /* if (date.before()){
                     expir ="EXPIRED";
-                }
+                } */
 
                 /* ektyposh olwn twn stoixeiwn gia dokimh
                  */
