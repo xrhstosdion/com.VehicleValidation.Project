@@ -8,7 +8,7 @@ public class MainProgram {
         do {
             // epanalipsh gia na doulepsei panw apo mia askhsh
             // edw ksekinaei to programma. zhtaei ton arithmo ths askishs
-
+//trial and error
             System.out.println ( "=== OUR AWESOME PROJECT ===" );
             System.out.println ( "1. ----" );
             System.out.println ( "2. DateValidator" );
