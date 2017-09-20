@@ -3,7 +3,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
 import java.text.ParseException;
@@ -16,17 +16,21 @@ public class MainProgram {
         /* diavasma arxeiou CSV
           Diabazei to arxeio CSV, me xorismenh thn kathe timh me ;
          */
-        String csvFile = "C:/Users/ekped/Desktop/Projects/com.VehicleValidation.Project/csvv.csv";
+        String csvsource1 ="C:/Users/ekped/Desktop/Projects/com.VehicleValidation.Project/csvv.csv"; //apo PC
+        String csvsource2 ="/Users/chris/Desktop/#Projects/com.VehicleValidation.Project/csvv.csv"; // apo MAC
+        String csvFile = csvsource2;
         String line = "";
         String cvsSplitBy = ";";
-        String expir = "VALID";
+        String expir = "EXPIRED";
 
-        LocalDate localDate = LocalDate.now();
+        //dokimh tou local date
 
+        // Metatroph shmerinhs hmerominias se symvath morfh
+        LocalDate localDate = LocalDate.now();//For reference
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String formattedDateNow = localDate.format(formatter);
+        System.out.println ( formattedDateNow );
 
-
-
-        System.out.println(LocalDate.now());
 
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
 
@@ -37,23 +41,22 @@ public class MainProgram {
 
             while ((line = br.readLine()) != null) {
 
-                /*
-                  Epanalipsi oso yparxoun grammes sto CSV
-                 */
+                //Epanalipsi oso yparxoun grammes sto CSV
 
-                // use comma as separator
+                // use ; as separator
                 String[] info = line.split(cvsSplitBy);
 
                 //Date conversion
-                /* Eisagei thn hmerominia me sygkekrimeno format
-                 */
+                //Eisagei thn hmerominia me sygkekrimeno format
                 DateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-                Date date = df.parse(info[3]);
 
-                // Elegxos an h hmerominia einai prin thn shmerinh hmerominia
-                /* if (date.before()){
-                    expir ="EXPIRED";
-                } */
+                //eisagei thn hmerominia apo pinaka sthn thesh 3
+                Date date = df.parse(info[3]);
+                Date datenow = df.parse ( formattedDateNow );
+                if (date.compareTo ( datenow ) >= 0 ){
+                    expir = "VALID";
+                }
+
 
                 /* ektyposh olwn twn stoixeiwn gia dokimh
                  */
@@ -64,6 +67,7 @@ public class MainProgram {
 
             }
         } catch (IOException | ParseException e) {
+            // Invalid date was entered
             e.printStackTrace();
         }
 
