@@ -17,7 +17,7 @@ public class DateValidator {
          */
         String csvsource1 = "C:/Users/ekped/Desktop/Projects/com.VehicleValidation.Project/csvv.csv"; //apo PC
         String csvsource2 = "/Users/chris/Desktop/#Projects/com.VehicleValidation.Project/csvv.csv"; // apo MAC
-        String csvFile = csvsource2;
+        String csvFile = csvsource1;
         String line = "";
         String cvsSplitBy = ";";
         String expir = "EXPIRED";
