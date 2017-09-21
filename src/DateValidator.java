@@ -33,7 +33,7 @@ public class DateValidator {
         System.out.println ( "Default path: " + csvFile); // <- Emfanizei to default path
         Scanner scan = new Scanner ( System.in );
         String input = scan.nextLine ();
-        
+
                 // Edw orizoume an den mas graspei tipota o xrhsths, krataei to default path
                 if(input != null && !input.isEmpty()) {
                 csvFile = input;
