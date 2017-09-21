@@ -8,64 +8,69 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Scanner;
 
 public class DateValidator {
     public DateValidator () {
 
-                /* diavasma arxeiou CSV
-          Diabazei to arxeio CSV, me xorismenh thn kathe timh me ;
-         */
+          //Diavasma arxeiou CSV
+          //Diabazei to arxeio CSV, me xorismenh thn kathe timh me ";"
         String csvsource1 = "C:/Users/ekped/Desktop/Projects/com.VehicleValidation.Project/csvv.csv"; //apo PC
         String csvsource2 = "/Users/chris/Desktop/#Projects/com.VehicleValidation.Project/csvv.csv"; // apo MAC
-        String csvFile = csvsource1;
-        String line = "";
-        String cvsSplitBy = ";";
-        String expir = "EXPIRED";
-
-        //dokimh tou local date
+        String csvFile = csvsource2; // <- Default path gia to CSV arxeio
+        String line = ""; // <- Diaxorizei thn kathe grammh sto CSV arxeio
+        String cvsSplitBy = ";"; // <- Orizei me poio simvolo sto CSV arxeio pername sthn epomenh eggrafh
+        String expir = "EXPIRED"; // <- Arxikopoihsh tou Expired (allazei parakatw me IF)
 
         // Metatroph shmerinhs hmerominias se symvath morfh
-        LocalDate localDate = LocalDate.now ();//For reference
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern ( "dd/MM/yyyy" );
-        String formattedDateNow = localDate.format ( formatter );
-        System.out.println ( formattedDateNow );
+        LocalDate localDate = LocalDate.now ();//For reference <- apothikefsh shmerinhs hmeorminias se metablith
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern ( "dd/MM/yyyy" );// <- metatroph se ayto to fortmat
+        String formattedDateNow = localDate.format ( formatter ); // <-
+        // System.out.println ( formattedDateNow ); // <- dokimastiko
 
+        // Edw dinetai h dynatothta na eisagoume neo path gia to arxeio CSV
+        System.out.println ( "Give us the path of the CSV File (leave blank for default)" );
+        System.out.println ( "Default path: " + csvFile); // <- Emfanizei to default path
+        Scanner scan = new Scanner ( System.in );
+        String input = scan.nextLine ();
+        
+                // Edw orizoume an den mas graspei tipota o xrhsths, krataei to default path
+                if(input != null && !input.isEmpty()) {
+                csvFile = input;
+                // System.out.println ( " KENO " ); // <- dokimastiko gia an doulevei h IF
+            }
 
+        //Epanalipsh gia na apothikevei se pinaka tis times apo to CSV
         try (BufferedReader br = new BufferedReader ( new FileReader ( csvFile ) )) {
 
-
-            /*
-              Epanalipsh gia na apothikevei se pinaka tis times apo to CSV
-             */
-
-            while ((line = br.readLine ()) != null) {
-
-                //Epanalipsi oso yparxoun grammes sto CSV
-
-                // use ; as separator
-                String[] info = line.split ( cvsSplitBy );
+            while ((line = br.readLine ()) != null) { // <- Epanalipsi oso yparxoun grammes sto CSV
+                String[] info = line.split ( cvsSplitBy ); // <- use ; as separator
 
                 //Date conversion
                 //Eisagei thn hmerominia me sygkekrimeno format
                 DateFormat df = new SimpleDateFormat ( "dd/MM/yyyy", Locale.ENGLISH );
 
-                //eisagei thn hmerominia apo pinaka sthn thesh 3
+                //diavazei thn hmerominia apo thn thesh 3 tou pinaka
                 Date date = df.parse ( info[3] );
                 Date datenow = df.parse ( formattedDateNow );
+
+                // An h hmerominia einai megalhterh apo thn shmerinh, tote einai VALID
                 if (date.compareTo ( datenow ) >= 0) {
                     expir = "VALID";
                 }
 
 
-                /* ektyposh olwn twn stoixeiwn gia dokimh
-                 */
+                // ektyposh olwn twn stoixeiwn gia dokimh
                 System.out.println ( "The owner is: " + info[0] + " the brand is: " + info[1] +
                         " the model is: " + info[2] + " it was registered at: " +
                         (new SimpleDateFormat ( "MM-dd-yyyy" ).format ( date ))
                         + " for " + info[4] + " months. " + expir );
 
             }
-        } catch (IOException | ParseException e) {
+        }
+
+        // Aparaithto se periptosh pou dothei lathos hmeromhnia
+        catch (IOException | ParseException e) {
             // Invalid date was entered
             e.printStackTrace ();
         }

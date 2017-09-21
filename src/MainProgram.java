@@ -8,11 +8,13 @@ public class MainProgram {
         do {
             // epanalipsh gia na doulepsei panw apo mia askhsh
             // edw ksekinaei to programma. zhtaei ton arithmo ths askishs
-//trial and error
+            System.out.println ( "===========================" );
             System.out.println ( "=== OUR AWESOME PROJECT ===" );
+            System.out.println ( "PLEASE SELECT AN OPERATION" );
             System.out.println ( "1. LicensePlatesValidator" );
             System.out.println ( "2. DateValidator" );
             System.out.println ( "3. ----" );
+            System.out.println ( "===========================" );
             // edw diavazei ton arithmo pou tou dwsame
 
             Scanner scan = new Scanner ( System.in );
