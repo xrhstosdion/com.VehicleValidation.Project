@@ -1,3 +1,5 @@
+import com.sun.org.apache.bcel.internal.generic.NEW;
+
 import java.util.Scanner;
 
 // Chris Karidis
@@ -53,6 +55,9 @@ public class MainProgram {
                     new DataSorter ();
                     break;
 
+                case "22":
+                    new NewDateValidator();
+                    break;
             }
 
         }
