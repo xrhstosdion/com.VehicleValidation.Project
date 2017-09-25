@@ -12,63 +12,76 @@ import java.util.Locale;
 
 public class NewDateValidator {
 
-    public NewDateValidator() {
+    //////////////////////////////////////////////
+    public DateFormat dateFormat() {
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+        return df;
+    }
+    //////////////////////////////////////////////////////
 
-        //Diavasma arxeiou CSV
-        String filePath = new File("VehiclesData.csv").getAbsolutePath();
-        System.out.println("EDW" + filePath);
-
-        String line = ""; // <- Diaxorizei thn kathe grammh sto CSV arxeio
-        String cvsSplitBy = ";"; // <- Orizei me poio simvolo sto CSV arxeio pername sthn epomenh eggrafh
+    public Date formatedDateNow() {
 
         ////////////////////////////////////
         // Metatroph shmerinhs hmerominias se symvath morfh
-        LocalDate localDate = LocalDate.now ();//For reference <- apothikefsh shmerinhs hmeorminias se metablith
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern ( "dd/MM/yyyy" );// <- metatroph se ayto to fortmat
-
-        DateFormat df = new SimpleDateFormat ( "dd/MM/yyyy", Locale.ENGLISH );
+        LocalDate localDate = LocalDate.now();//For reference <- apothikefsh shmerinhs hmeorminias se metablith
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");// <- metatroph se ayto to fortmat
 
         ////////////////////////// LOCAL DATE
         Date dateNow = null;
         try {
-            dateNow = df.parse ( localDate.format ( formatter ) );
+            dateNow = dateFormat().parse(localDate.format(formatter));
         } catch (ParseException e) {
             e.printStackTrace();
         }
         /////////////////////////
+        return dateNow;
+    }
+
+    public String[] fileParser() {
+
+        //Diavasma arxeiou CSV
+        String filePath = new File("VehiclesData.csv").getAbsolutePath();
+
+        String line = ""; // <- Diaxorizei thn kathe grammh sto CSV arxeio
 
         //Epanalipsh gia na apothikevei se pinaka tis times apo to CSV
-        try (BufferedReader br = new BufferedReader ( new FileReader ( filePath ) )) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
 
-            //Date conversion
-            //Eisagei thn hmerominia me sygkekrimeno format
-
-
-            while ((line = br.readLine ()) != null) { // <- Epanalipsi oso yparxoun grammes sto CSV
-                String[] info = line.split ( cvsSplitBy ); // <- use ; as separator
-
-                //diavazei thn hmerominia apo thn thesh 2 tou pinaka
-                Date date = df.parse ( info[2] );
-
-                String expir="EXPIRED"; // <- epanafora ths "expir" sthn arxikh ths timh
-
-                // An h hmerominia einai megalhterh apo thn shmerinh, tote einai VALID
-                if (date.compareTo ( dateNow ) >= 0) {
-                    expir = "VALID";
-                }
+            while ((line = br.readLine()) != null) { // <- Epanalipsi oso yparxoun grammes sto CSV
+                String[] info = line.split(";"); // <- use ; as separator
 
 
-                // ektyposh olwn twn stoixeiwn gia dokimh
-                System.out.println ( "The owner is: " + info[1] + " the licence number is: " + info[0] +
-                        " and the date registered is: " + date + ". This licence is: " + expir );
 
             }
         }
 
         // Aparaithto se periptosh pou dothei lathos hmeromhnia
-        catch (IOException | ParseException e) {
+        catch (IOException  e) {
             // Invalid date was entered
-            e.printStackTrace ();
+            e.printStackTrace();
         }
+        return fileParser();
     }
+
+
+    public NewDateValidator() {
+
+
+        //diavazei thn hmerominia apo thn thesh 2 tou pinaka
+        Date date = dateFormat().parse(info[2]);
+
+        String expiredStatus = "EXPIRED"; // <- epanafora ths "expir" sthn arxikh ths timh
+
+        // An h hmerominia einai megalhterh apo thn shmerinh, tote einai VALID
+        if (date.compareTo(formatedDateNow()) >= 0) {
+            expiredStatus = "VALID";
+        }
+        String formatedDate = new SimpleDateFormat("dd/MM/yyyy").format(date);
+
+        // ektyposh olwn twn stoixeiwn gia dokimh
+        System.out.println("The owner is: " + info[1] + " the licence number is: " + info[0] +
+                " and the date registered is: " + formatedDate + ". This licence is: " + expiredStatus);
+    }
+
 }
+
