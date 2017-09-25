@@ -38,7 +38,9 @@ public class MainProgram {
             switch (input) {
 
                 case "1": //LicensePlatesValidator
-                    new LicensePlatesValidator();
+                    if ( LicensePlatesValidator.getValidFormat());{
+                    System.out.println("Hello People of Las Vegas!");
+                }
                     break;
 
                 case "2": // DateValidator

@@ -6,22 +6,24 @@ import java.util.Scanner;
  */
 public class LicensePlatesValidator {
 
-    public LicensePlatesValidator(){
+    public static boolean getValidFormat() {
 
-        Scanner scanner = new Scanner( System.in );
+        boolean bool = false;
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Please provide a license type (format: ABC-1234)");
         String userInput = scanner.nextLine();
         String validFormat = "[a-zA-Z]{3}-\\d{4}";
 
-        while (!userInput.matches(validFormat) &&  !userInput.equals("exit")){
+        while (!userInput.matches(validFormat) && !userInput.equals("exit")) {
             System.out.println("The format is Wrong, provide a correct one (ABC-1234) or type exit to exit");
             userInput = scanner.nextLine();
         }
-        if (userInput.matches(validFormat)){
+        if (userInput.matches(validFormat)) {
             System.out.println("The license plates format is accepted");
-        }
-        else {
+            bool = true;
+        } else {
             System.out.println("The program is exiting");
         }
+        return bool;
     }
 }
