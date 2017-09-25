@@ -42,7 +42,7 @@ public class MainProgram {
             switch (input) {
 
                 case "1": //LicensePlatesValidator
-                    if ( LicensePlatesValidator.getValidFormat());{
+                    if ( LicensePlatesValidator.getValidFormat()){
                     System.out.println("Hello People of Las Vegas!");
                 }
                     break;
@@ -51,11 +51,11 @@ public class MainProgram {
                     new DateValidator ();
                     break;
 
-                case "3": // Data Sorter
+                case "32": // Data Sorter
                     new DataSorter ();
                     break;
 
-                case "22":
+                case "3":
                     new NewDateValidator();
                     break;
             }

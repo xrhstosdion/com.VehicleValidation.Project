@@ -1,5 +1,3 @@
-import com.sun.prism.shader.Solid_TextureYV12_AlphaTest_Loader;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -14,16 +12,12 @@ import java.util.Locale;
 
 public class NewDateValidator {
 
-    //////////////////////////////////////////////
     public DateFormat dateFormat() {
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-        return df;
+        return new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
     }
-    //////////////////////////////////////////////////////
 
     public Date formatedDateNow() {
 
-        ////////////////////////////////////
         // Metatroph shmerinhs hmerominias se symvath morfh
         LocalDate localDate = LocalDate.now();//For reference <- apothikefsh shmerinhs hmeorminias se metablith
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");// <- metatroph se ayto to fortmat
@@ -35,13 +29,12 @@ public class NewDateValidator {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        /////////////////////////
         return dateNow;
     }
 
     public String[][] fileParser() {
         String[] info = new String[3];
-        String[][] info1 = new String[100][3];
+        String[][] info1 = new String[99][3];
         int i = 0;
         //Diavasma arxeiou CSV
 
@@ -67,29 +60,31 @@ public class NewDateValidator {
     }
 
     public NewDateValidator() {
-
         String[][] info1 = fileParser();
-        String info5 = info1[0][2];
-        //diavazei thn hmerominia apo thn thesh 2 tou pinaka
-        Date date = null;
-        try {
-            date = dateFormat().parse(info5);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        String expiredStatus = "EXPIRED"; // <- epanafora ths "expir" sthn arxikh ths timh
 
-        // An h hmerominia einai megalhterh apo thn shmerinh, tote einai VALID
-        if (date.compareTo(formatedDateNow()) >= 0) {
-            expiredStatus = "VALID";
-        }
-        String formatedDate = new SimpleDateFormat("dd/MM/yyyy").format(date);
+        LicensePlatesValidator lpv = new LicensePlatesValidator();
 
-        // ektyposh olwn twn stoixeiwn gia dokimh
-        System.out.println("The owner is: " + info1[0][1] + " the licence number is: " + info1[0][0] +
-                " and the date registered is: " + info1[0][2] + ". This licence is: " + expiredStatus);
+        if (lpv.getValidFormat2()) {
+            System.out.println("wanted element is! "+info1[8][2]);
+
+            for (int i = 0; i < info1.length; i++ ){
+                if (info1[i][1].equals(lpv.getStrInput())){
+                    Date date = null;
+                    try {
+                        date = dateFormat().parse(info1[i][2]);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    String expiredStatus = "EXPIRED"; // <- epanafora ths "expir" sthn arxikh ths timh
+
+                    // An h hmerominia einai megalhterh apo thn shmerinh, tote einai VALID
+                    if (date.compareTo(formatedDateNow()) >= 0) {
+                        expiredStatus = "VALID";
+                    }
+                    System.out.println("AFM : " + info1[i][1] + " Plates number: " + info1[i][0] +
+                            " Date registered: " + info1[i][2] +" License status: "+ expiredStatus);
+                }
+            }
+        }
     }
-
-
 }
-
