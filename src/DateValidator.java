@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -8,17 +9,16 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Scanner;
 
 public class DateValidator {
 
     public DateValidator () {
 
-          //Diavasma arxeiou CSV
-          //Diabazei to arxeio CSV, me xorismenh thn kathe timh me ";"
-        String csvsource1 = "C:/Users/ekped/Desktop/Projects/com.VehicleValidation.Project/csvv.csv"; //apo PC
-        String csvsource2 = "/Users/chris/Desktop/#Projects/com.VehicleValidation.Project/VehiclesData.csv"; // apo MAC
-        String csvFile = csvsource2; // <- Default path gia to CSV arxeio
+        //Diavasma arxeiou CSV
+        String filePath = new File("VehiclesData.csv").getAbsolutePath();
+        System.out.println("EDW" + filePath);
+
+        String csvFile = filePath; // <- Default path gia to CSV arxeio
         String line = ""; // <- Diaxorizei thn kathe grammh sto CSV arxeio
         String cvsSplitBy = ";"; // <- Orizei me poio simvolo sto CSV arxeio pername sthn epomenh eggrafh
 
@@ -26,20 +26,6 @@ public class DateValidator {
         LocalDate localDate = LocalDate.now ();//For reference <- apothikefsh shmerinhs hmeorminias se metablith
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern ( "dd/MM/yyyy" );// <- metatroph se ayto to fortmat
         String formattedDateNow = localDate.format ( formatter ); // <-
-        // System.out.println ( formattedDateNow ); // <- dokimastiko
-
-        // Edw dinetai h dynatothta na eisagoume neo path gia to arxeio CSV
-        System.out.println ( "Give us the path of the CSV File (leave blank for default)" );
-        System.out.println ( "Default path: " + csvFile); // <- Emfanizei to default path
-        System.out.println ("The current date is: " +  formattedDateNow );
-        Scanner scan = new Scanner ( System.in );
-        String input = scan.nextLine ();
-
-                // Edw orizoume an den mas graspei tipota o xrhsths, krataei to default path
-                if(input != null && !input.isEmpty()) {
-                csvFile = input;
-                // System.out.println ( " KENO " ); // <- dokimastiko gia an doulevei h IF
-            }
 
         //Epanalipsh gia na apothikevei se pinaka tis times apo to CSV
         try (BufferedReader br = new BufferedReader ( new FileReader ( csvFile ) )) {
