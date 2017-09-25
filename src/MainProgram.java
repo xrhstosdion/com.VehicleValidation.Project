@@ -59,6 +59,7 @@ public class MainProgram {
 
         // Ta parapanw tha simvenoun mexri o xrhsths na eisagei 0
         while (i < 1 || 1 > 3);
+        //while (i != 0);
         System.out.println ( "Good Bye!!" );
     }
 }

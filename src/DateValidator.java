@@ -21,7 +21,6 @@ public class DateValidator {
         String csvFile = csvsource2; // <- Default path gia to CSV arxeio
         String line = ""; // <- Diaxorizei thn kathe grammh sto CSV arxeio
         String cvsSplitBy = ";"; // <- Orizei me poio simvolo sto CSV arxeio pername sthn epomenh eggrafh
-        String expir = "EXPIRED"; // <- Arxikopoihsh tou Expired (allazei parakatw me IF)
 
         // Metatroph shmerinhs hmerominias se symvath morfh
         LocalDate localDate = LocalDate.now ();//For reference <- apothikefsh shmerinhs hmeorminias se metablith
@@ -56,7 +55,7 @@ public class DateValidator {
                 Date date = df.parse ( info[2] );
                 Date datenow = df.parse ( formattedDateNow );
 
-                expir="EXPIRED"; // <- epanafora ths "expir" sthn arxikh ths timh
+                String expir="EXPIRED"; // <- epanafora ths "expir" sthn arxikh ths timh
 
                 // An h hmerominia einai megalhterh apo thn shmerinh, tote einai VALID
                 if (date.compareTo ( datenow ) >= 0) {
