@@ -45,6 +45,10 @@ public class MainProgram {
                     new DateValidator ();
                     break;
 
+                case "3": // Data Sorter
+                    new DataSorter ();
+                    break;
+
             }
 
         }
