@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+// Chris Karidis
+
 public class MainProgram {
 
     public static void main ( String[] args ) {
