@@ -11,6 +11,7 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class DateValidator {
+
     public DateValidator () {
 
           //Diavasma arxeiou CSV
@@ -67,8 +68,6 @@ public class DateValidator {
                 System.out.println ( "The owner is: " + info[1] + " the licence number is: " + info[0] +
                         " and the date registered is: " +
                         (new SimpleDateFormat ( "dd/MM/yyyy" ).format ( date )) + ". This licence is: " + expir );
-
-
 
             }
         }
