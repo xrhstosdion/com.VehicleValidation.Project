@@ -26,6 +26,25 @@ public class LicensePlatesValidator {
         }
         return false;
     }
+
+    public static boolean getValidFormat2() {
+
+        System.out.println("Please provide AFM");
+        String userInput = StrInput.askStrInput();
+        String validFormat = "\\d{9}";
+
+        while (!userInput.matches(validFormat) && !userInput.equals("exit")) {
+            System.out.println("The format is Wrong, provide a correct one ('123456789') or type 'exit' to EXIT");
+            userInput = StrInput.askStrInput();
+        }
+        if (userInput.matches(validFormat)) {
+            System.out.println("The AFM format is accepted!");
+            return true;
+        } else {
+            System.out.println("The program is exiting");
+        }
+        return false;
+    }
 static int sum =0;
 
     public static int dateValidator(String date1){
@@ -45,24 +64,5 @@ static int sum =0;
             }
             System.out.println("the sum is = "+sum);
             return sum;
-    }
-
-    public boolean getValidFormat2() {
-
-        System.out.println("Please provide AFM");
-        String userInput = StrInput.askStrInput();
-        String validFormat = "\\d{9}";
-
-        while (!userInput.matches(validFormat) && !userInput.equals("exit")) {
-            System.out.println("The format is Wrong, provide a correct one ('123456789') or type 'exit' to EXIT");
-            userInput = StrInput.askStrInput();
-        }
-        if (userInput.matches(validFormat)) {
-            System.out.println("The AFM format is accepted!");
-            return true;
-        } else {
-            System.out.println("The program is exiting");
-        }
-        return false;
     }
 }
