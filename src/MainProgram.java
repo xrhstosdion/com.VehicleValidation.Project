@@ -58,12 +58,22 @@ public class MainProgram {
                 case "3":
                     new NewDateValidator();
                     break;
-            }
 
+                case "4":
+                    System.out.println("please provide the holy input");
+                    new StrInput();
+                    String hello = StrInput.getStrInput();
+                    new StrInput();
+                    String hello1 = StrInput.getStrInput();
+                    System.out.println("the hello is "+hello);
+                    System.out.println("the hello1 is "+hello);
+
+                    break;
+            }
         }
 
         // Ta parapanw tha simvenoun mexri o xrhsths na eisagei 0
-        while (i < 1 || i > 3);
+        while (i < 1 || i > 5);
         //while (i != 0);
         System.out.println ( "Good Bye!!" );
     }

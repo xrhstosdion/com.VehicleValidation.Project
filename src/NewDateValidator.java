@@ -16,7 +16,7 @@ public class NewDateValidator {
         return new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
     }
 
-    public Date formatedDateNow() {
+    public Date dateNowFormat() {
 
         // Metatroph shmerinhs hmerominias se symvath morfh
         LocalDate localDate = LocalDate.now();//For reference <- apothikefsh shmerinhs hmeorminias se metablith
@@ -65,8 +65,6 @@ public class NewDateValidator {
         LicensePlatesValidator lpv = new LicensePlatesValidator();
 
         if (lpv.getValidFormat2()) {
-            System.out.println("wanted element is! "+info1[8][2]);
-
             for (int i = 0; i < info1.length; i++ ){
                 if (info1[i][1].equals(lpv.getStrInput())){
                     Date date = null;
@@ -78,7 +76,7 @@ public class NewDateValidator {
                     String expiredStatus = "EXPIRED"; // <- epanafora ths "expir" sthn arxikh ths timh
 
                     // An h hmerominia einai megalhterh apo thn shmerinh, tote einai VALID
-                    if (date.compareTo(formatedDateNow()) >= 0) {
+                    if (date.compareTo(dateNowFormat()) >= 0) {
                         expiredStatus = "VALID";
                     }
                     System.out.println("AFM : " + info1[i][1] + " Plates number: " + info1[i][0] +
