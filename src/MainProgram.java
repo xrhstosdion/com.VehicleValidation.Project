@@ -1,7 +1,3 @@
-import com.sun.org.apache.bcel.internal.generic.NEW;
-
-import java.util.Scanner;
-
 // Chris Karidis
 
 public class MainProgram {
@@ -48,11 +44,35 @@ public class MainProgram {
                     break;
 
                 case "32": // Data Sorter
-                    new DataSorter ();
+                    //new DataSorter ();
+                    FileParser fp = new FileParser("VehiclesData.csv");
+                    String[][] info3 = fp.csvToTable();
+                    for (i=0; i<info3.length; i++){
+                        for (int j=0; j<info3[1].length; j++){
+
+                            System.out.println(info3[i][j]);
+                        }
+
+
+                    }
                     break;
 
                 case "3":
-                    new NewDateValidator();
+                    String userInput = StrInput.askStrInput();
+                    Validator valid = new Validator(1,userInput);
+
+                    while (!valid.validateConfirmation() && !userInput.equals("exit")) {
+                        System.out.println(valid.getWrongFormat());
+                        userInput = StrInput.askStrInput();
+                    }
+
+                    if (valid.validateConfirmation()){
+                        NewDateValidator info = new NewDateValidator();
+                        String info1[][] = info.fileParser();
+                    }
+
+
+
                     break;
 
                 case "4":
@@ -65,7 +85,7 @@ public class MainProgram {
                     //System.out.println("the hello1 is "+hello1);
                     break;
             }
-        } while (i < 1 || i > 5);
+        } while (i != 0);
         System.out.println ( "Good Bye!!" );
     }
 }

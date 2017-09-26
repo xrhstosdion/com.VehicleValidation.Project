@@ -13,6 +13,7 @@ import java.util.Locale;
 public class NewDateValidator {
 
     public static DateFormat dateFormat() {
+
         return new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
     }
 
