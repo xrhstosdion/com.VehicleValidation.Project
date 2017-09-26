@@ -1,5 +1,7 @@
-// Chris Karidis
-
+import Validators.Validators;
+import tools.FileParser;
+import tools.Tools;
+import Input.StrInput;
 public class MainProgram {
 
     public static void main ( String[] args ) {
@@ -14,7 +16,7 @@ public class MainProgram {
             System.out.println("PLEASE SELECT AN OPERATION");
             System.out.println("1. LicensePlatesValidator");
             System.out.println("2. DateValidator");
-            System.out.println("3. ----");
+            System.out.println("4. FineCalculator");
             System.out.println("0. TO EXIT");
             System.out.println("===========================");
 
@@ -34,55 +36,34 @@ public class MainProgram {
             switch (input) {
 
                 case "1": //LicensePlatesValidator
-                    if ( LicensePlatesValidator.getValidFormat()){
-                    System.out.println("Hello People of Las Vegas!");
-                }
+
+
                     break;
 
-                case "2": // DateValidator
-                    new DateValidator ();
-                    break;
-
-                case "32": // Data Sorter
+                case "4": // Fine Calculator
                     //new DataSorter ();
                     FileParser fp = new FileParser("VehiclesData.csv");
+                    StrInput.askStrInput();
                     String[][] info3 = fp.csvToTable();
-                    for (i=0; i<info3.length; i++){
-                        for (int j=0; j<info3[1].length; j++){
 
-                            System.out.println(info3[i][j]);
-                        }
-
-
-                    }
+                    Tools myTable = new Tools();
+                    myTable.tableSearch(info3,1, 100);
                     break;
 
                 case "3":
                     String userInput = StrInput.askStrInput();
-                    Validator valid = new Validator(1,userInput);
+                    Validators valid = new Validators();
+                    valid.formatValidator(1,userInput);
 
                     while (!valid.validateConfirmation() && !userInput.equals("exit")) {
                         System.out.println(valid.getWrongFormat());
                         userInput = StrInput.askStrInput();
                     }
 
-                    if (valid.validateConfirmation()){
-                        NewDateValidator info = new NewDateValidator();
-                        String info1[][] = info.fileParser();
-                    }
-
-
-
                     break;
 
-                case "4":
-                    System.out.println("please provide the holy input");
-                    String input123;
-                    StrInput.askStrInput();
-                    input123 = StrInput.askStrInput();
-                    input123 = input123.getClass().getName();
-                    System.out.println("the hello is "+input123);
-                    //System.out.println("the hello1 is "+hello1);
+                case "5":
+                    //Validator.validateConfirmation();
                     break;
             }
         } while (i != 0);
