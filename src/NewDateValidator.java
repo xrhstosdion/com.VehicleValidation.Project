@@ -58,11 +58,11 @@ public class NewDateValidator {
     }
 
     public NewDateValidator() {
-        String[][] info1 = fileParser();
 
         LicensePlatesValidator lpv = new LicensePlatesValidator();
 
         if (lpv.getValidFormat2()) {
+            String[][] info1 = fileParser();
             for (int i = 0; i < info1.length; i++) {
                 if (info1[i][1].equals(StrInput.getStrInput())) {
                     LicensePlatesValidator.dateValidator(info1[i][2]);
