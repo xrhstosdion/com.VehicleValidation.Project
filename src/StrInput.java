@@ -4,8 +4,6 @@ class StrInput {
 
     private static String userInput;
 
-    StrInput(){}
-
     String setStrInput(String x){
         return userInput = x;
     }

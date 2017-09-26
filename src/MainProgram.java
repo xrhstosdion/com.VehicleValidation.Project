@@ -23,20 +23,16 @@ public class MainProgram {
             System.out.println("===========================");
 
             // edw diavazei ton arithmo pou tou dwsame
-            Scanner scan = new Scanner(System.in);
-
             // h metablith input tha pernei to apotelesma kai tha fortonei to katalilo operation
-            input = scan.next();
+            input = StrInput.askStrInput();
             try {
                 i = Integer.parseInt(input);
             } catch (NumberFormatException e){
                 System.out.println("wrong is not valid number. try again");
             }
             if (i==0 || i>3){
-                System.out.println("not in 1-3");
+                System.out.println("not in 1-4");
             }
-
-
 
             // Se kathe epilogh fortonetai h antistoixh klash
             switch (input) {
@@ -61,21 +57,15 @@ public class MainProgram {
 
                 case "4":
                     System.out.println("please provide the holy input");
-                    String input123 = StrInput.askStrInput();
+                    String input123;
+                    StrInput.askStrInput();
                     input123 = StrInput.askStrInput();
                     input123 = input123.getClass().getName();
                     System.out.println("the hello is "+input123);
                     //System.out.println("the hello1 is "+hello1);
                     break;
             }
-        }
-
-        // Ta parapanw tha simvenoun mexri o xrhsths na eisagei 0
-        while (i < 1 || i > 5);
-        //while (i != 0);
+        } while (i < 1 || i > 5);
         System.out.println ( "Good Bye!!" );
     }
 }
-
-
-

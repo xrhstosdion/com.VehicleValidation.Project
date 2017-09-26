@@ -1,3 +1,5 @@
+import java.text.ParseException;
+import java.util.Date;
 import java.util.Scanner;
 
 /**
@@ -24,13 +26,32 @@ public class LicensePlatesValidator {
         }
         return false;
     }
+static int sum =0;
+
+    public static int dateValidator(String date1){
+            Date date = null;
+            try {
+                date = NewDateValidator.dateFormat().parse(date1);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            String expiredStatus = "EXPIRED"; // <- epanafora ths "expir" sthn arxikh ths timh
+            // An h hmerominia einai megalhterh apo thn shmerinh, tote einai VALID
+            if (date.compareTo(NewDateValidator.dateNowFormat()) >= 0) {
+                expiredStatus = "VALID";
+            }
+            else {
+                sum = sum + 50;
+            }
+            System.out.println("the sum is = "+sum);
+            return sum;
+    }
 
     public boolean getValidFormat2() {
 
         System.out.println("Please provide AFM");
         String userInput = StrInput.askStrInput();
         String validFormat = "\\d{9}";
-
 
         while (!userInput.matches(validFormat) && !userInput.equals("exit")) {
             System.out.println("The format is Wrong, provide a correct one ('123456789') or type 'exit' to EXIT");
