@@ -6,22 +6,17 @@ import java.util.Scanner;
  */
 public class LicensePlatesValidator {
 
-    public String strInput;
-
     public static boolean getValidFormat() {
+
         System.out.println("Please provide a license type (format: ABC-1234)");
-        new StrInput();
-        String userInput1 = StrInput.getStrInput();
+        String userInput = StrInput.askStrInput();
         String validFormat = "[a-zA-Z]{3}-\\d{4}";
 
-        while (!userInput1.matches(validFormat) && !userInput1.equals("exit")) {
+        while (!userInput.matches(validFormat) && !userInput.equals("exit")) {
             System.out.println("The format is Wrong, provide a correct one (ABC-1234) or type 'exit' to EXIT");
-            new StrInput();
-            userInput1 = StrInput.getStrInput();
-
-
+            userInput = StrInput.askStrInput();
         }
-        if (userInput1.matches(validFormat)) {
+        if (userInput.matches(validFormat)) {
             System.out.println("The license plates format is accepted");
             return true;
         } else {
@@ -30,29 +25,19 @@ public class LicensePlatesValidator {
         return false;
     }
 
-    public String setStrInput(String x){
-        return this.strInput = x;
-    }
-
-    public String getStrInput(){
-        return strInput;
-    }
-
     public boolean getValidFormat2() {
-        Scanner scanner = new Scanner(System.in);
 
         System.out.println("Please provide AFM");
-        String userInput = scanner.nextLine();
+        String userInput = StrInput.askStrInput();
         String validFormat = "\\d{9}";
 
 
         while (!userInput.matches(validFormat) && !userInput.equals("exit")) {
             System.out.println("The format is Wrong, provide a correct one ('123456789') or type 'exit' to EXIT");
-            userInput = scanner.nextLine();
+            userInput = StrInput.askStrInput();
         }
         if (userInput.matches(validFormat)) {
             System.out.println("The AFM format is accepted!");
-            setStrInput(userInput);
             return true;
         } else {
             System.out.println("The program is exiting");

@@ -61,13 +61,11 @@ public class MainProgram {
 
                 case "4":
                     System.out.println("please provide the holy input");
-                    new StrInput();
-                    String hello = StrInput.getStrInput();
-                    new StrInput();
-                    String hello1 = StrInput.getStrInput();
-                    System.out.println("the hello is "+hello);
-                    System.out.println("the hello1 is "+hello);
-
+                    String input123 = StrInput.askStrInput();
+                    input123 = StrInput.askStrInput();
+                    input123 = input123.getClass().getName();
+                    System.out.println("the hello is "+input123);
+                    //System.out.println("the hello1 is "+hello1);
                     break;
             }
         }

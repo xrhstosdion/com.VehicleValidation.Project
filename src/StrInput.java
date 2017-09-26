@@ -4,10 +4,7 @@ class StrInput {
 
     private static String userInput;
 
-    StrInput(){
-        Scanner scanner = new Scanner(System.in);
-        userInput = scanner.nextLine();
-    }
+    StrInput(){}
 
     String setStrInput(String x){
         return userInput = x;
@@ -15,5 +12,12 @@ class StrInput {
 
     static String getStrInput(){
         return userInput;
+    }
+
+    static String askStrInput(){
+        Scanner scanner = new Scanner(System.in);
+        userInput = scanner.nextLine();
+        return userInput;
+
     }
 }

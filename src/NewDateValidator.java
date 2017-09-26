@@ -63,10 +63,9 @@ public class NewDateValidator {
         String[][] info1 = fileParser();
 
         LicensePlatesValidator lpv = new LicensePlatesValidator();
-
         if (lpv.getValidFormat2()) {
             for (int i = 0; i < info1.length; i++ ){
-                if (info1[i][1].equals(lpv.getStrInput())){
+                if (info1[i][1].equals(StrInput.getStrInput())){
                     Date date = null;
                     try {
                         date = dateFormat().parse(info1[i][2]);
