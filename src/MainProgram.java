@@ -1,12 +1,16 @@
 import Validators.Validators;
+import Vehicle.Vehicle;
 import tools.FileParser;
 import tools.Tools;
 import Input.StrInput;
+
+import java.util.ArrayList;
+
 public class MainProgram {
 
-    public static void main ( String[] args ) {
+    public static void main (String[] args) {
         String input;
-        int i =0;
+        int i = 100;
         do {
 
             // epanalipsh gia na doulepsei panw apo mia askhsh
@@ -41,13 +45,17 @@ public class MainProgram {
                     break;
 
                 case "4": // Fine Calculator
-                    //new DataSorter ();
-                    FileParser fp = new FileParser("VehiclesData.csv");
-                    StrInput.askStrInput();
-                    String[][] info3 = fp.csvToTable();
 
-                    Tools myTable = new Tools();
-                    myTable.tableSearch(info3,1, 100);
+                    System.out.println("give the AFM");
+                    String userInputAFM = StrInput.askStrInput();
+                    System.out.println("give the amount of fine per expired license");
+                    int userInputFine = Integer.parseInt(StrInput.askStrInput());
+
+                    FileParser fp10 = new FileParser("VehiclesData.csv");
+                    ArrayList<Vehicle> vehicleList = fp10.csvToTable();
+                    Tools myArray = new Tools();
+                    int fine = myArray.tableSearch(vehicleList,userInputFine,userInputAFM);
+                    System.out.println("the fine is really "+fine);
                     break;
 
                 case "3":
@@ -59,11 +67,22 @@ public class MainProgram {
                         System.out.println(valid.getWrongFormat());
                         userInput = StrInput.askStrInput();
                     }
-
                     break;
 
                 case "5":
-                    //Validator.validateConfirmation();
+
+
+
+                    /*for (int k = 0; k <info10.length; k++ ){
+                        for (int l = 1; l<info10.length -k; l++){
+                            String licensePlate1 = info10[l-1][0];
+                            String licensePlate2 = info10[l][0];
+
+                            if (info10[l-1][0] > info10[l][0]){
+
+                            }
+                        }
+                    }*/
                     break;
             }
         } while (i != 0);

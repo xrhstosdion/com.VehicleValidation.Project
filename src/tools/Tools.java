@@ -1,30 +1,35 @@
 package tools;
 import Validators.Validators;
-import Input.StrInput;
+import Vehicle.Vehicle;
+import org.jetbrains.annotations.NotNull;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
 public class Tools {
-       public int tableSearch(String[][] table, int j, int fine) {
-        int sum = 0;
-        for (int i = 0; i < table.length; i++) {
-            if (table[i][j].equals(StrInput.getStrInput())) {
-                if (!Validators.dateValidator(table[i][2])) {
-                    sum = sum + fine;
-                }
-                System.out.println("AFM : " + table[i][1] + " Plates number: " + table[i][0] +
-                        " Date Until Expired: " + table[i][2]);
-            }
-        }
-        System.out.println("the total fine is!"+sum);
-        return sum;
+
+       public int tableSearch(ArrayList<Vehicle> vehicleList, int fine, String userInput) {
+           int sum = 0;
+           for (int i = 0; i < vehicleList.size(); i++){
+               if (vehicleList.get(i).afm.equals(userInput)){
+                   if (!Validators.dateValidator(vehicleList.get(i).licenseDate)){
+                       sum = sum + fine;
+                   }
+                   System.out.println("AFM : " + vehicleList.get(i).afm + " Plates number: " + vehicleList.get(i).licensePlate +
+                           " Date Until Expired: " + vehicleList.get(i).licenseDate);
+               }
+           }
+           System.out.println("the total fine is "+sum);
+           return sum;
     }
 
+    @NotNull
     public static DateFormat dateFormat() {
         return new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
     }

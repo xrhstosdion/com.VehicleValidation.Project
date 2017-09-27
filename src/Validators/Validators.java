@@ -47,10 +47,10 @@ public class Validators {
         Validators.wrongFormat = wrongFormat;
     }
 
-    public static boolean dateValidator(String date1) {
+    public static boolean dateValidator(String VehicleDate) {
         Date date = null;
         try {
-            date = Tools.dateFormat().parse(date1);
+            date = Tools.dateFormat().parse(VehicleDate);
         } catch (ParseException e) {
             e.printStackTrace();
         }
