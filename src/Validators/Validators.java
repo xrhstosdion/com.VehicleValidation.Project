@@ -1,10 +1,5 @@
 package Validators;
 
-import tools.Tools;
-
-import java.text.ParseException;
-import java.util.Date;
-
 public class Validators {
 
     public String validFormat;
@@ -12,17 +7,15 @@ public class Validators {
     private static String wrongFormat;
 
 
-    public void formatValidator(int type, String data) {
-
-        this.data = data;
+    public void formatValidator(String type) {
 
         switch (type) {
-            case 1: {
+            case "LicensePlates": {
                 validFormat = "[a-zA-Z]{3}-\\d{4}";
                 setWrongFormat("The format is Wrong, provide a correct one (ABC-1234) or type 'exit' to EXIT");
                 break;
             }
-            case 2: {
+            case "AFM": {
                 validFormat = "\\d{9}";
                 wrongFormat = "The format is Wrong, provide a correct one (123456789) or type 'exit' to EXIT";
 
@@ -45,19 +38,5 @@ public class Validators {
         Validators.wrongFormat = wrongFormat;
     }
 
-    public static boolean dateValidator(String VehicleDate) {
-        Date date = null;
-        try {
-            date = Tools.dateFormat().parse(VehicleDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        String expiredStatus = "EXPIRED"; // <- epanafora ths "expir" sthn arxikh ths timh
-        // An h hmerominia einai megalhterh apo thn shmerinh, tote einai VALID
-        if (date.compareTo(Tools.dateNowFormat()) >= 0) {
-            expiredStatus = "VALID";
-            return true;
-        }
-        return false;
-    }
+
 }
