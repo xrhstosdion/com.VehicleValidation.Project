@@ -9,14 +9,12 @@ public class Validators {
 
     public String validFormat;
     private String data;
-    private int type;
     private static String wrongFormat;
 
 
     public void formatValidator(int type, String data) {
 
         this.data = data;
-        this.type = type;
 
         switch (type) {
             case 1: {
@@ -34,7 +32,7 @@ public class Validators {
         }
     }
 
-    public boolean validateConfirmation() {
+    public boolean validateConfirmation(String data) {
 
         return data.matches(validFormat);
     }

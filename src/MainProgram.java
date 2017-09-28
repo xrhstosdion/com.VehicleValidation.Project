@@ -41,30 +41,47 @@ public class MainProgram {
 
                 case "1": //LicensePlatesValidator
 
+                    System.out.println("give the License Plates");
+                    String userInputLP = StrInput.askStrInput();
 
+                    Validators valid = new Validators();
+                    valid.formatValidator(1,userInputLP);
+
+                    while (!valid.validateConfirmation(userInputLP) && !userInputLP.equals("exit")) {
+                        System.out.println(valid.getWrongFormat());
+                        userInputLP = StrInput.askStrInput();
+                    }
+                    if (valid.validateConfirmation(userInputLP)) {
+                        FileParser fp1 = new FileParser("VehiclesData.csv");
+                        ArrayList<Vehicle> vehicleList1 = fp1.csvToTable();
+                        Tools myArray1 = new Tools();
+
+                        ArrayList<Vehicle> vehiclesFound1 = myArray1.vehicleSearch(vehicleList1, userInputLP);
+                        Tools.actionVehicleSearch(vehiclesFound1, "LicensePlates");
+                    }
                     break;
 
                 case "4": // Fine Calculator
 
                     System.out.println("give the AFM");
                     String userInputAFM = StrInput.askStrInput();
-                    System.out.println("give the amount of fine per expired license");
-                    int userInputFine = Integer.parseInt(StrInput.askStrInput());
 
-                    FileParser fp10 = new FileParser("VehiclesData.csv");
-                    ArrayList<Vehicle> vehicleList = fp10.csvToTable();
-                    Tools myArray = new Tools();
-                    int fine = myArray.tableSearch(vehicleList,userInputFine,userInputAFM);
-                    System.out.println("the fine is really "+fine);
+                    FileParser fp2 = new FileParser("VehiclesData.csv");
+                    ArrayList<Vehicle> vehicleList2 = fp2.csvToTable();
+                    Tools myArray2 = new Tools();
+
+                    ArrayList<Vehicle> vehiclesFound2 = myArray2.vehicleSearch(vehicleList2,userInputAFM);
+                    Tools.actionVehicleSearch(vehiclesFound2,"afm");
+
                     break;
 
                 case "3":
                     String userInput = StrInput.askStrInput();
-                    Validators valid = new Validators();
-                    valid.formatValidator(1,userInput);
+                    Validators valid100 = new Validators();
+                    valid100.formatValidator(1,userInput);
 
-                    while (!valid.validateConfirmation() && !userInput.equals("exit")) {
-                        System.out.println(valid.getWrongFormat());
+                    while (!valid100.validateConfirmation(userInput) && !userInput.equals("exit")) {
+                        System.out.println(valid100.getWrongFormat());
                         userInput = StrInput.askStrInput();
                     }
                     break;
