@@ -59,6 +59,7 @@ public class Tools {
                }
                break;
                case "AFM": {
+                   localDate = LocalDate.now();
                    if (foundVehiclesList.isEmpty()){
                        System.out.println("the owner with the above AFM does not exist!");
                        break;

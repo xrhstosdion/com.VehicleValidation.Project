@@ -73,13 +73,22 @@ public class MainProgram {
                     System.out.println("give the AFM");
                     String userInputAFM = StrInput.askStrInput();
 
-                    FileParser fp4 = new FileParser("VehiclesData.csv");
-                    ArrayList<Vehicle> vehicleList4 = fp4.csvToTable();
-                    Tools myArray4 = new Tools();
+                    Validators valid4 = new Validators();
+                    valid4.formatValidator("AFM");
 
-                    ArrayList<Vehicle> vehiclesFound4 = myArray4.vehicleSearch(vehicleList4,userInputAFM);
-                    Tools.actionVehicleSearch(vehiclesFound4,"AFM");
+                    while (!valid4.validateConfirmation(userInputAFM) && !userInputAFM.equals("exit")) {
+                        System.out.println(valid4.getWrongFormat());
+                        userInputAFM = StrInput.askStrInput();
+                    }
+                    if (valid4.validateConfirmation(userInputAFM)) {
 
+                        FileParser fp4 = new FileParser("VehiclesData.csv");
+                        ArrayList<Vehicle> vehicleList4 = fp4.csvToTable();
+                        Tools myArray4 = new Tools();
+
+                        ArrayList<Vehicle> vehiclesFound4 = myArray4.vehicleSearch(vehicleList4, userInputAFM);
+                        Tools.actionVehicleSearch(vehiclesFound4, "AFM");
+                    }
                     break;
 
                 case "3":
