@@ -19,6 +19,7 @@ public class MainProgram {
             System.out.println("PLEASE SELECT AN OPERATION");
             System.out.println("1. LicensePlatesValidator");
             System.out.println("2. DateValidator");
+            System.out.println("3. LicensePlateShorter");
             System.out.println("4. FineCalculator");
             System.out.println("0. TO EXIT");
             System.out.println("===========================");
@@ -76,16 +77,31 @@ public class MainProgram {
                     //Tools.actionVehicleSearch(nonExpiredVehicles,"Date");
                     break;
 
-                case "3":
-
-                   /* System.out.println("give the DAYS");
-                    int days =  Integer.parseInt(StrInput.askStrInput());
-                    DateCompare.setLocalDate(days);
+                case "3": // LicensePlateShorter
 
                     FileParser fp3 = new FileParser("VehiclesData.csv");
-                    ArrayList<Vehicle> vehicleList3 = fp2.csvToTable();
+                    ArrayList<Vehicle> vehicleList3 = fp3.csvToTable();
 
-                    Tools.actionVehicleSearch(vehicleList2,"Date");*/
+                    for (i = 0; i < vehicleList3.size(); i++) {
+                        for (int j = 1; j < (vehicleList3.size() - i); j++) {
+                            if (vehicleList3.get(j - 1).licensePlate.compareTo( vehicleList3.get(j).licensePlate)>0) {
+                                Vehicle temp = vehicleList3.get(j - 1);
+                                vehicleList3.set(j - 1, vehicleList3.get(j));
+                                vehicleList3.set(j, temp);}
+                        }
+                    }
+
+                    for (i = 0; i < vehicleList3.size(); i++) {
+
+                        System.out.println("AFM : " + vehicleList3.get(i).afm +
+                                " Plates number:" + " " + vehicleList3.get(i).licensePlate +
+                                " Date Until Expired: " + vehicleList3.get(i).licenseDate +
+                                " License: ");
+
+                    }
+
+
+
                     break;
 
                 case "4": // Fine Calculator
