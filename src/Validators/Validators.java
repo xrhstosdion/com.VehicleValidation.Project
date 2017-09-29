@@ -6,6 +6,12 @@ public class Validators {
     private String data;
     private static String wrongFormat;
 
+    /*public boolean checkFine(String fine){
+        String validFine = "\\d";
+        if (fine.matches(validFine)){
+
+        }
+    }*/
 
     public void formatValidator(String type) {
 

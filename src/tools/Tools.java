@@ -1,23 +1,10 @@
 package tools;
 import Input.StrInput;
 import Vehicle.Vehicle;
-import org.jetbrains.annotations.NotNull;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 
 public class Tools {
-
-    public static LocalDate localDate = LocalDate.now();
-
-    public static void setLocalDate(int days){
-        localDate = LocalDate.now().plusDays(days);
-    }
 
        public ArrayList<Vehicle> vehicleSearch(ArrayList<Vehicle> vehicleList, String userInput) {
 
@@ -35,6 +22,27 @@ public class Tools {
            return foundVehiclesList;
        }
 
+    public ArrayList<Vehicle> vehicleNonExpiredSearch(ArrayList<Vehicle> vehicleList) {
+
+        ArrayList<Vehicle> foundVehiclesList = new ArrayList<Vehicle>();
+
+        for (int i = 0; i < vehicleList.size(); i++) {
+            //String expired = "VALID";
+            int j = 0;
+            if ((!DateCompare.dateCompare(vehicleList.get(i).licenseDate))) {
+                foundVehiclesList.add(vehicleList.get(j));
+                System.out.println("AFM : " + foundVehiclesList.get(j).afm +
+                        " Plates number:" + " " + foundVehiclesList.get(j).licensePlate +
+                        " Date Until Expired: " + foundVehiclesList.get(j).licenseDate +
+                        " License: ");
+                j++;
+
+            }
+
+        }
+        return foundVehiclesList;
+    }
+
        public static void actionVehicleSearch(ArrayList<Vehicle> foundVehiclesList, String action) {
            String licenseStatus = "EXPIRED";
            int sum = 0;
@@ -46,7 +54,7 @@ public class Tools {
                        System.out.println("the vehicle with the above License Plates does not exist!");
                        break;
                    }
-                   if (!dateCompare(foundVehiclesList.get(0).licenseDate)) {
+                   if (!DateCompare.dateCompare(foundVehiclesList.get(0).licenseDate)) {
                        System.out.println("The License is " + licenseStatus);
                    } else {
                        licenseStatus = "VALID";
@@ -59,7 +67,7 @@ public class Tools {
                }
                break;
                case "AFM": {
-                   localDate = LocalDate.now();
+                   DateCompare.setLocalDate(0);
                    if (foundVehiclesList.isEmpty()){
                        System.out.println("the owner with the above AFM does not exist!");
                        break;
@@ -68,7 +76,7 @@ public class Tools {
                    fine = Integer.parseInt(StrInput.askStrInput());
                    for (int i = 0; i < foundVehiclesList.size(); i++) {
                        licenseStatus = "VALID";
-                       if (!dateCompare(foundVehiclesList.get(i).licenseDate)) {
+                       if (!DateCompare.dateCompare(foundVehiclesList.get(i).licenseDate)) {
                            licenseStatus = "EXPIRED";
                            sum = sum + fine;
                        }
@@ -87,7 +95,7 @@ public class Tools {
                    }
                    for (int i = 0; i < foundVehiclesList.size(); i++) {
                        //licenseStatus = "VALID";
-                       if (!dateCompare(foundVehiclesList.get(i).licenseDate)) {
+                       if (!DateCompare.dateCompare(foundVehiclesList.get(i).licenseDate)) {
                            //licenseStatus = "EXPIRED";
                            System.out.println("AFM : " + foundVehiclesList.get(i).afm +
                                    " Plates number:" + " " + foundVehiclesList.get(i).licensePlate +
@@ -100,41 +108,4 @@ public class Tools {
                }
            }
        }
-
-    @NotNull
-    public static DateFormat dateFormat() {
-        return new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
     }
-
-    public static Date dateNowFormat() {
-        //LocalDate.now().plusDays(1000);
-        // Metatroph shmerinhs hmerominias se symvath morfh
-        //For reference <- apothikefsh shmerinhs hmeorminias se metablith
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");// <- metatroph se ayto to fortmat
-        ////////////////////////// LOCAL DATE
-        Date dateNow = null;
-        try {
-            dateNow = dateFormat().parse(localDate.format(formatter));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return dateNow;
-    }
-
-    public static boolean dateCompare(String VehicleDate) {
-        Date date = null;
-        try {
-            date = Tools.dateFormat().parse(VehicleDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        String expiredStatus = "EXPIRED"; // <- epanafora ths "expir" sthn arxikh ths timh
-        // An h hmerominia einai megalhterh apo thn shmerinh, tote einai VALID
-        if (date.compareTo(Tools.dateNowFormat()) >= 0) {
-            expiredStatus = "VALID";
-            return true;
-        }
-        return false;
-    }
-}
