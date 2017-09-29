@@ -45,13 +45,14 @@ public class DateCompare {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-        String expiredStatus = "EXPIRED"; // <- epanafora ths "expir" sthn arxikh ths timh
         // An h hmerominia einai megalhterh apo thn shmerinh, tote einai VALID
         if (date.compareTo(dateNowFormat()) >= 0) {
-            expiredStatus = "VALID";
             return true;
         }
         return false;
+    }
+
+    public static LocalDate getLocalDate() {
+        return localDate;
     }
 }

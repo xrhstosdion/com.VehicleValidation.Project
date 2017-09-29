@@ -91,12 +91,12 @@ public class MainProgram {
                         }
                     }
 
-                    for (i = 0; i < vehicleList3.size(); i++) {
+                    for (i = 0; i < vehicleList3.size(); i++){
 
                         System.out.println("AFM : " + vehicleList3.get(i).afm +
                                 " Plates number:" + " " + vehicleList3.get(i).licensePlate +
                                 " Date Until Expired: " + vehicleList3.get(i).licenseDate +
-                                " License: ");
+                                " License: " + vehicleList3.get(i).status);
 
                     }
 
