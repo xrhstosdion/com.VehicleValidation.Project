@@ -1,11 +1,9 @@
 import Validators.Validators;
 import Vehicle.Vehicle;
-import tools.DateCompare;
-import tools.FileParser;
-import tools.LicensePlateSorter;
-import tools.Tools;
+import tools.*;
 import Input.StrInput;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class MainProgram {
@@ -96,7 +94,7 @@ public class MainProgram {
 
                     break;
 
-                case "4": // Fine Calculator
+                case "44": // Fine Calculator
 
                     System.out.println("give the AFM");
                     String userInputAFM = StrInput.askStrInput();
@@ -118,6 +116,11 @@ public class MainProgram {
                         Tools.actionVehicleSearch(vehiclesFound4, "AFM");
                     }
                     break;
+
+                case "4":
+
+
+
             }
         } while (i != 0);
         System.out.println ( "Good Bye!!" );
