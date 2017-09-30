@@ -1,9 +1,6 @@
 import Validators.Validators;
 import Vehicle.Vehicle;
-import tools.DateCompare;
-import tools.FileParser;
-import tools.LicensePlateSorter;
-import tools.Tools;
+import tools.*;
 import Input.StrInput;
 
 import java.io.FileNotFoundException;
@@ -15,8 +12,8 @@ import java.util.ArrayList;
 public class MainProgram {
 
     public static void main (String[] args) {
-        String input123;
-        int caseInt = 100;
+        String input;
+        int i = 100;
         do {
 
             System.out.println("===========================");
@@ -29,17 +26,17 @@ public class MainProgram {
             System.out.println("0. TO EXIT");
             System.out.println("===========================");
 
-            input123 = StrInput.askStrInput();
+            input = StrInput.askStrInput();
             try {
-                caseInt = Integer.parseInt(input123);
+                i = Integer.parseInt(input);
             } catch (NumberFormatException e){
                 System.out.println("wrong is not valid number. try again");
             }
-            if (caseInt==0 || caseInt>4){
+            if (i==0 || i>4){
                 System.out.println("not in 1-4");
             }
 
-            switch (input123) {
+            switch (input) {
 
                 case "1": //LicensePlatesValidator
 
@@ -90,6 +87,19 @@ public class MainProgram {
                                 " Plates number: " + vehicleList3.get(i).getLicensePlate() +
                                 " Date Until Expired: " + vehicleList3.get(i).getLicenseDate() +
                                 " License: " + vehicleList3.get(i).getStatus());
+                        System.out.println("AFM : " + vehicleList3.get(i).afm +
+                                " Plates number: " + vehicleList3.get(i).licensePlate +
+                                " Date Until Expired: " + vehicleList3.get(i).licenseDate +
+                                " License: " + vehicleList3.get(i).status);
+
+                        String afm = vehicleList3.get(i).afm;
+                        String licensePlate = vehicleList3.get(i).licensePlate;
+                        String licenseDate = vehicleList3.get(i).licenseDate;
+                        String status = vehicleList3.get(i).status;
+
+
+                        CSVExporter csvex = new CSVExporter(afm, licensePlate, licenseDate, status,i);
+                        csvex.csvExporter();
                     }
 
                     break;
@@ -106,20 +116,19 @@ public class MainProgram {
                         System.out.println(valid4.getWrongFormat());
                         userInputAFM = StrInput.askStrInput();
                     }
-                    if (!valid4.validateConfirmation(userInputAFM)) {
-                        break;
-                    }
+                    if (valid4.validateConfirmation(userInputAFM)) {
 
-
-                    FileParser fp4 = new FileParser("VehiclesData.csv");
-                    ArrayList<Vehicle> vehicleList4 = fp4.csvToTable();
-                    Tools myArray4 = new Tools();
+                        FileParser fp4 = new FileParser("VehiclesData.csv");
+                        ArrayList<Vehicle> vehicleList4 = fp4.csvToTable();
+                        Tools myArray4 = new Tools();
 
                     ArrayList<Vehicle> vehiclesFound4 = myArray4.vehicleSearch(vehicleList4, userInputAFM);
                     myArray4.actionVehicleSearch(vehiclesFound4, "AFM");
                     }
                     break;
-        } while (input123 != "0");
+
+            }
+        } while (i != 0);
         System.out.println ( "Good Bye!!" );
     }
 }
