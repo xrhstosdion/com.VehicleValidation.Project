@@ -4,6 +4,9 @@ import tools.*;
 import Input.StrInput;
 
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 public class MainProgram {
@@ -84,7 +87,7 @@ public class MainProgram {
                     LicensePlateSorter lps = new LicensePlateSorter();
                     vehicleList3 = lps.arraySorter(vehicleList3);
 
-                    for (i = 0; i < vehicleList3.size(); i++){
+                    for (i = 0; i < vehicleList3.size(); i++) {
 
                         System.out.println("AFM : " + vehicleList3.get(i).afm +
                                 " Plates number: " + vehicleList3.get(i).licensePlate +
@@ -118,7 +121,6 @@ public class MainProgram {
                     break;
 
                 case "4":
-
 
 
             }
