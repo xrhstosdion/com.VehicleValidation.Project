@@ -13,7 +13,7 @@ public class MainProgram {
 
     public static void main (String[] args) {
         String input;
-        int i = 100;
+        int intInput = 100;
         do {
 
             System.out.println("===========================");
@@ -28,11 +28,11 @@ public class MainProgram {
 
             input = StrInput.askStrInput();
             try {
-                i = Integer.parseInt(input);
+                intInput = Integer.parseInt(input);
             } catch (NumberFormatException e){
                 System.out.println("wrong is not valid number. try again");
             }
-            if (i==0 || i>4){
+            if (intInput==0 || intInput>4){
                 System.out.println("not in 1-4");
             }
 
@@ -87,15 +87,11 @@ public class MainProgram {
                                 " Plates number: " + vehicleList3.get(i).getLicensePlate() +
                                 " Date Until Expired: " + vehicleList3.get(i).getLicenseDate() +
                                 " License: " + vehicleList3.get(i).getStatus());
-                        System.out.println("AFM : " + vehicleList3.get(i).afm +
-                                " Plates number: " + vehicleList3.get(i).licensePlate +
-                                " Date Until Expired: " + vehicleList3.get(i).licenseDate +
-                                " License: " + vehicleList3.get(i).status);
 
-                        String afm = vehicleList3.get(i).afm;
-                        String licensePlate = vehicleList3.get(i).licensePlate;
-                        String licenseDate = vehicleList3.get(i).licenseDate;
-                        String status = vehicleList3.get(i).status;
+                        String afm = vehicleList3.get(i).getAfm();
+                        String licensePlate = vehicleList3.get(i).getLicensePlate();
+                        String licenseDate = vehicleList3.get(i).getLicenseDate();
+                        String status = vehicleList3.get(i).getStatus();
 
 
                         CSVExporter csvex = new CSVExporter(afm, licensePlate, licenseDate, status,i);
@@ -128,7 +124,7 @@ public class MainProgram {
                     break;
 
             }
-        } while (i != 0);
+        } while (intInput != 0);
         System.out.println ( "Good Bye!!" );
     }
 }
