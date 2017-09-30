@@ -1,7 +1,6 @@
 package tools;
 
 import org.jetbrains.annotations.NotNull;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -46,6 +45,7 @@ public class DateCompare {
             e.printStackTrace();
         }
         // An h hmerominia einai megalhterh apo thn shmerinh, tote einai VALID
+        assert date != null;
         if (date.compareTo(dateNowFormat()) >= 0) {
             return true;
         }

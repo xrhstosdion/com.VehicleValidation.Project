@@ -1,17 +1,11 @@
 package Validators;
 
+import Input.StrInput;
+
 public class Validators {
 
     public String validFormat;
-    private String data;
     private static String wrongFormat;
-
-    /*public boolean checkFine(String fine){
-        String validFine = "\\d";
-        if (fine.matches(validFine)){
-
-        }
-    }*/
 
     public void formatValidator(String type) {
 
@@ -23,10 +17,13 @@ public class Validators {
             }
             case "AFM": {
                 validFormat = "\\d{9}";
-                wrongFormat = "The format is Wrong, provide a correct one (123456789) or type 'exit' to EXIT";
-
                 setWrongFormat("The format is Wrong, provide a correct one (123456789) or type 'exit' to EXIT");
                 break;
+            }
+            case "Fine":{
+                validFormat = "\\d+";
+                setWrongFormat("The format is Wrong, provide a correct one (a number) or type 'exit' to EXIT");
+
             }
         }
     }
@@ -43,6 +40,5 @@ public class Validators {
     public void setWrongFormat(String wrongFormat) {
         Validators.wrongFormat = wrongFormat;
     }
-
 
 }

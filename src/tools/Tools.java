@@ -1,8 +1,10 @@
 package tools;
 import Input.StrInput;
+import Validators.Validators;
 import Vehicle.Vehicle;
-import java.time.LocalDate;
 import java.util.ArrayList;
+
+import static tools.DateCompare.dateNowFormat;
 
 public class Tools {
 
@@ -11,101 +13,81 @@ public class Tools {
            ArrayList<Vehicle> foundVehiclesList = new ArrayList<Vehicle>();
 
            for (int i = 0; i < vehicleList.size(); i++) {
-               //String expired = "VALID";
-               if (vehicleList.get(i).afm.equals(userInput)) {
+               if (vehicleList.get(i).getAfm().equals(userInput)) {
                    foundVehiclesList.add(vehicleList.get(i));
                }
-               if (vehicleList.get(i).licensePlate.equals((userInput))) {
+               if (vehicleList.get(i).getLicensePlate().equals((userInput))) {
                    foundVehiclesList.add(vehicleList.get(i));
                }
            }
            return foundVehiclesList;
        }
 
-    public ArrayList<Vehicle> vehicleNonExpiredSearch(ArrayList<Vehicle> vehicleList) {
-
-        ArrayList<Vehicle> foundVehiclesList = new ArrayList<Vehicle>();
-
-        for (int i = 0; i < vehicleList.size(); i++) {
-            //String expired = "VALID";
-            int j = 0;
-            if ((!DateCompare.dateCompare(vehicleList.get(i).licenseDate))) {
-                foundVehiclesList.add(vehicleList.get(j));
-                System.out.println("AFM : " + foundVehiclesList.get(j).afm +
-                        " Plates number:" + " " + foundVehiclesList.get(j).licensePlate +
-                        " Date Until Expired: " + foundVehiclesList.get(j).licenseDate +
-                        " License: ");
-                j++;
-
-            }
-
-        }
-        return foundVehiclesList;
-    }
-
-       public static void actionVehicleSearch(ArrayList<Vehicle> foundVehiclesList, String action) {
-           String licenseStatus = "EXPIRED";
+       public void actionVehicleSearch(ArrayList<Vehicle> foundVehiclesList, String action) {
            int sum = 0;
-           int fine;
-           //for/in object property
            switch (action) {
-               case "LicensePlates": {
+               case "LicensePlates":
                    if (foundVehiclesList.isEmpty()){
                        System.out.println("the vehicle with the above License Plates does not exist!");
                        break;
                    }
-                   if (!DateCompare.dateCompare(foundVehiclesList.get(0).licenseDate)) {
-                       System.out.println("The License is " + licenseStatus);
-                   } else {
-                       licenseStatus = "VALID";
-                       System.out.println("The License is " + licenseStatus);
-                   }
-                   System.out.println("AFM : " + foundVehiclesList.get(0).afm +
-                           " Plates number:" + " " + foundVehiclesList.get(0).licensePlate +
-                           " Date Until Expired: " + foundVehiclesList.get(0).licenseDate +
-                           " License: " + licenseStatus);
-               }
+                   System.out.println("AFM : " + foundVehiclesList.get(0).getAfm() +
+                           " Plates number:" + " " + foundVehiclesList.get(0).getLicensePlate() +
+                           " Date Until Expired: " + foundVehiclesList.get(0).getLicenseDate() +
+                           " License: " + foundVehiclesList.get(0).getStatus());
                break;
-               case "AFM": {
+
+               case "AFM":
                    DateCompare.setLocalDate(0);
                    if (foundVehiclesList.isEmpty()){
                        System.out.println("the owner with the above AFM does not exist!");
                        break;
                    }
+                   /*System.out.println("Please provide the amount of fine");
+                   String fine = Integer.parseInt(StrInput.askStrInput());*/
+                   Validators val = new Validators();
+                   val.formatValidator("Fine");
                    System.out.println("Please provide the amount of fine");
-                   fine = Integer.parseInt(StrInput.askStrInput());
+                   String fine = StrInput.askStrInput();
+                   int fine1;
+                   while (!val.validateConfirmation(fine) && !fine.equals("exit")) {
+                       System.out.println(val.getWrongFormat());
+                       fine = StrInput.askStrInput();
+                   }
+                   if (!val.validateConfirmation(fine)) {
+                       break;
+                   }
+                   else{
+                       fine1 = Integer.parseInt(fine);
+                   }
                    for (int i = 0; i < foundVehiclesList.size(); i++) {
-                       licenseStatus = "VALID";
-                       if (!DateCompare.dateCompare(foundVehiclesList.get(i).licenseDate)) {
-                           licenseStatus = "EXPIRED";
-                           sum = sum + fine;
+                       if (foundVehiclesList.get(i).getStatus() == "EXPIRED") {
+                           sum = sum + fine1;
                        }
-                       System.out.println("AFM : " + foundVehiclesList.get(i).afm +
-                               " Plates number:" + " " + foundVehiclesList.get(i).licensePlate +
-                               " Date Until Expired: " + foundVehiclesList.get(i).licenseDate +
-                               " License: "+licenseStatus);
+                       System.out.println("AFM : " + foundVehiclesList.get(i).getAfm() +
+                               " Plates number:" + " " + foundVehiclesList.get(i).getLicensePlate() +
+                               " Date Until Expired: " + foundVehiclesList.get(i).getLicenseDate() +
+                               " License: "+foundVehiclesList.get(i).getStatus());
                    }
                    System.out.println("The total amount of fine is "+sum);
-                   break;
-               }
-               case "Date": {
+
+               break;
+               case "Date":
                    if (foundVehiclesList.isEmpty()){
-                       System.out.println("the owner with the above AFM does not exist!");
+                       System.out.println("No vehicles found that will be expired!");
                        break;
                    }
                    for (int i = 0; i < foundVehiclesList.size(); i++) {
-                       //licenseStatus = "VALID";
-                       if (!DateCompare.dateCompare(foundVehiclesList.get(i).licenseDate)) {
-                           //licenseStatus = "EXPIRED";
-                           System.out.println("AFM : " + foundVehiclesList.get(i).afm +
-                                   " Plates number:" + " " + foundVehiclesList.get(i).licensePlate +
-                                   " Date Until Expired: " + foundVehiclesList.get(i).licenseDate +
-                                   " License: EXPIRED");
+                       if (foundVehiclesList.get(i).getStatus() == "VALID") {
+                           if (!DateCompare.dateCompare(foundVehiclesList.get(i).getLicenseDate())) {
+                               System.out.println("AFM : " + foundVehiclesList.get(i).getAfm() +
+                                       " Plates number:" + " " + foundVehiclesList.get(i).getLicensePlate() +
+                                       " Date Until Expired: " + foundVehiclesList.get(i).getLicenseDate() +
+                                       " License: it will be EXPIRED before " + dateNowFormat());
+                           }
                        }
-
                    }
                    break;
-               }
            }
        }
     }
