@@ -93,11 +93,22 @@ public class MainProgram {
                                 " Plates number: " + vehicleList3.get(i).licensePlate +
                                 " Date Until Expired: " + vehicleList3.get(i).licenseDate +
                                 " License: " + vehicleList3.get(i).status);
+
+                        String afm = vehicleList3.get(i).afm;
+                        String licensePlate = vehicleList3.get(i).licensePlate;
+                        String licenseDate = vehicleList3.get(i).licenseDate;
+                        String status = vehicleList3.get(i).status;
+
+
+                        CSVExporter csvex = new CSVExporter(afm, licensePlate, licenseDate, status,i);
+                        csvex.csvExporter();
                     }
+
+
 
                     break;
 
-                case "44": // Fine Calculator
+                case "4": // Fine Calculator
 
                     System.out.println("give the AFM");
                     String userInputAFM = StrInput.askStrInput();
@@ -119,9 +130,6 @@ public class MainProgram {
                         Tools.actionVehicleSearch(vehiclesFound4, "AFM");
                     }
                     break;
-
-                case "4":
-
 
             }
         } while (i != 0);

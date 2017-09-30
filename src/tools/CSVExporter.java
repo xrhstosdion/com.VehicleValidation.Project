@@ -18,6 +18,7 @@ public class CSVExporter {
         this.licensePlate=licensePlate;
         this.status=status;
         this.repeats=repeats;
+        this.repeats = repeats;
 
     }
 
