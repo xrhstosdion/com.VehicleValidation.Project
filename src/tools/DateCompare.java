@@ -23,11 +23,8 @@ public class DateCompare {
     }
 
     public static Date dateNowFormat() {
-        //LocalDate.now().plusDays(1000);
-        // Metatroph shmerinhs hmerominias se symvath morfh
-        //For reference <- apothikefsh shmerinhs hmeorminias se metablith
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");// <- metatroph se ayto to fortmat
-        ////////////////////////// LOCAL DATE
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         Date dateNow = null;
         try {
             dateNow = dateFormat().parse(localDate.format(formatter));
@@ -44,15 +41,10 @@ public class DateCompare {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        // An h hmerominia einai megalhterh apo thn shmerinh, tote einai VALID
         assert date != null;
         if (date.compareTo(dateNowFormat()) >= 0) {
             return true;
         }
         return false;
-    }
-
-    public static LocalDate getLocalDate() {
-        return localDate;
     }
 }

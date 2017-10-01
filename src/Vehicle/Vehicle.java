@@ -9,14 +9,11 @@ public class Vehicle {
     private String licenseDate;
     private String status = "EXPIRED";
 
+
     public Vehicle(String licensePlate, String afm, String licenseDate) {
         this.licensePlate = licensePlate;
         this.afm = afm;
         this.licenseDate = licenseDate;
-
-        if (DateCompare.dateCompare(this.licenseDate)){
-            setStatus("VALID");
-        }
     }
 
     public String getLicensePlate() {
@@ -47,7 +44,11 @@ public class Vehicle {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatus() {
+        this.status = "EXPIRED";
+        if (DateCompare.dateCompare(this.licenseDate)){
+            this.status = "VALID";
+        }
+
     }
 }

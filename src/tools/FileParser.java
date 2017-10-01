@@ -15,23 +15,24 @@ public class FileParser{
         this.filePath = filePath;
     }
 
-    public ArrayList<Vehicle> csvToTable() {
+    public ArrayList<Vehicle> csvToArrayList() {
 
         String[] array;
-        ArrayList<Vehicle> vehicleList = new ArrayList<Vehicle>();
+        ArrayList<Vehicle> vehicleArrayList = new ArrayList<Vehicle>();
         String absoluteFilePath = new File(filePath).getAbsolutePath();
         String line;
 
         try (BufferedReader br = new BufferedReader(new FileReader(absoluteFilePath))) {
-            while ((line = br.readLine()) != null) { // <- Epanalipsi oso yparxoun grammes sto CSV
-                array = line.split(";"); // <- use ; as separator
+            while ((line = br.readLine()) != null) {
+                array = line.split(";");
                 Vehicle vehicle = new Vehicle(array[0],array[1],array[2]);
-                vehicleList.add(vehicle);
+                vehicle.setStatus();
+                vehicleArrayList.add(vehicle);
             }
         }
         catch (IOException e) {
             e.printStackTrace();
         }
-        return vehicleList;
+        return vehicleArrayList;
     }
 }

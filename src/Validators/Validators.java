@@ -4,8 +4,8 @@ import Input.StrInput;
 
 public class Validators {
 
-    public String validFormat;
-    private static String wrongFormat;
+    private String validFormat;
+    private String wrongFormat;
 
     public void formatValidator(String type) {
 
@@ -20,25 +20,37 @@ public class Validators {
                 setWrongFormat("The format is Wrong, provide a correct one (123456789) or type 'exit' to EXIT");
                 break;
             }
-            case "Fine":{
+            case "Fine": {
                 validFormat = "\\d+";
                 setWrongFormat("The format is Wrong, provide a correct one (a number) or type 'exit' to EXIT");
-
+                break;
             }
         }
     }
 
-    public boolean validateConfirmation(String data) {
-
-        return data.matches(validFormat);
+    public boolean validateConfirmation(String userData, String type) {
+        while(!userData.matches(validFormat) && !userData.equals("exit")){
+            System.out.println(getWrongFormat());
+            userData = StrInput.askStrInput();
+            if (type.equals("afm")){
+                StrInput.setUserAfm(userData);
+            }
+            if (type.equals("LicensePlates")){
+                StrInput.setUserLicensePlates(userData);
+            }
+            if (type.equals("Fine")){
+                StrInput.setFine(userData);
+            }
+        }
+        return userData.matches(validFormat);
     }
 
     public String getWrongFormat() {
         return wrongFormat;
     }
 
-    public void setWrongFormat(String wrongFormat) {
-        Validators.wrongFormat = wrongFormat;
+    private void setWrongFormat(String wrongFormat) {
+        this.wrongFormat = wrongFormat;
     }
 
 }
