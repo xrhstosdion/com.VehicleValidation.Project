@@ -7,6 +7,13 @@ import java.util.ArrayList;
 
 public class ArrayListAction {
 
+    /**
+     * Takes As arguments an ArrayList<Vehicle> and the user input (afm or licensePlates expected)
+     * Uses the user input to search in the ArrayList that was given as Argument
+     * Returns an ArrayList<Vehicle> with the found vehicles
+     * If the user input is an afm it will search for all the vehicles with the same afm
+     * If the user input is a License Plates it will search for the correct vehicle
+     */
     public ArrayList<Vehicle> vehicleSearch(ArrayList<Vehicle> vehicleList, String userInput) {
 
         ArrayList<Vehicle> foundVehiclesArrayList = new ArrayList<Vehicle>();
@@ -21,7 +28,13 @@ public class ArrayListAction {
         }
         return foundVehiclesArrayList;
     }
-
+    /**
+     * The main method of the Project.
+     * Takes as input an ArrayList<Vehicle> (the one returned from VehicleSearch in order to have correct results)
+     * Action : LicensePlates, will print the found vehicle
+     * Action : AFM, will check how many expired vehicles it has and add a fine for each one expired
+     * Action : Date, will check only the License "VALID" vehicles
+     */
     public void vehicleSearchOption(ArrayList<Vehicle> foundVehiclesArrayList, String action) {
         int totalFine = 0;
         switch (action) {

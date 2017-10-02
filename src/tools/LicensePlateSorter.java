@@ -5,6 +5,10 @@ import java.util.ArrayList;
 
 public class LicensePlateSorter {
 
+    /**
+     * Given an ArrayList<Vehicle> the method will sort it
+     * then return it
+     */
     public ArrayList<Vehicle> arraySorter (ArrayList<Vehicle> vehicleList) {
 
         for (int i = 0; i < vehicleList.size(); i++) {

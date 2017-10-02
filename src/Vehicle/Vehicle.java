@@ -49,6 +49,5 @@ public class Vehicle {
         if (DateCompare.dateCompare(this.licenseDate)){
             this.status = "VALID";
         }
-
     }
 }

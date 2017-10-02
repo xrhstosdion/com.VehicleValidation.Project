@@ -15,6 +15,11 @@ public class FileParser{
         this.filePath = filePath;
     }
 
+    /**
+     * Reads the CSV file that is set to filePath
+     * For each line it reads, a Vehicle is created and saved in an ArrayList<Vehicle>
+     * Finally the ArrayList is returned
+     */
     public ArrayList<Vehicle> csvToArrayList() {
 
         String[] array;

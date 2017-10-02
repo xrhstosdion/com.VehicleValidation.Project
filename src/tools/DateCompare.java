@@ -13,15 +13,24 @@ public class DateCompare {
 
     public static LocalDate localDate = LocalDate.now();
 
+    /**
+     * Sets the LocalDate to now() plus the days it was given as parameter
+     */
     public static void setLocalDate(int days){
         localDate = LocalDate.now().plusDays(days);
     }
 
+    /**
+     * Used in formatting the Vehicle Date
+     */
     @NotNull
     public static DateFormat dateFormat() {
         return new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
     }
 
+    /**
+     * Formatting localDate so it can be compared with vehicle date
+     */
     public static Date dateNowFormat() {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -34,6 +43,10 @@ public class DateCompare {
         return dateNow;
     }
 
+    /**
+     * Compares the formatted LocalDate with the formatted vehicle date
+     * Returns true if VehicleDate (which is given as argument) is bigger/older than LocalDate
+     */
     public static boolean dateCompare(String VehicleDate) {
         Date date = null;
         try {

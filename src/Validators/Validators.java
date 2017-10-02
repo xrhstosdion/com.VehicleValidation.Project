@@ -7,6 +7,10 @@ public class Validators {
     private String validFormat;
     private String wrongFormat;
 
+    /**
+     * Sets the type of the valid format from the shell console.
+     * Sets the appropriate Wrong message println
+     */
     public void formatValidator(String type) {
 
         switch (type) {
@@ -28,6 +32,10 @@ public class Validators {
         }
     }
 
+    /**
+     * Until the console input matches valid format or "exit"..
+     * Keep asking console input -- return True if correct input has been given
+     */
     public boolean validateConfirmation(String userData, String type) {
         while(!userData.matches(validFormat) && !userData.equals("exit")){
             System.out.println(getWrongFormat());

@@ -45,7 +45,7 @@ public class MainProgram {
                     }
                     break;
 
-                case "2": //DateValidator
+                case "2": //DateValidator (it prints ONLY the vehicles that are about to expire in the given Days)
 
                     FileParser fp2 = new FileParser(filePath);
                     ArrayList<Vehicle> vehicleList2 = fp2.csvToArrayList();
@@ -58,7 +58,7 @@ public class MainProgram {
                     myArray2.vehicleSearchOption(vehicleList2,"Date");
                     break;
 
-                case "3": // LicensePlateShorter
+                case "3": // LicensePlateShorter (Sorts the CSV file by Plates and prints it on console)
 
                     FileParser fp3 = new FileParser(filePath);
                     ArrayList<Vehicle> vehicleList3 = fp3.csvToArrayList();
@@ -67,10 +67,9 @@ public class MainProgram {
                     vehicleList3 = lps.arraySorter(vehicleList3);
 
                     for (int i = 0; i < vehicleList3.size(); i++) {
-
                         Texts.vehicleText(vehicleList3,i);
-
                     }
+
                     break;
 
                 case "4": // Fine Calculator
