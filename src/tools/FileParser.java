@@ -15,26 +15,29 @@ public class FileParser{
         this.filePath = filePath;
     }
 
-    public ArrayList<Vehicle> csvToTable() {
+    /**
+     * Reads the CSV file that is set to filePath
+     * For each line it reads, a Vehicle is created and saved in an ArrayList<Vehicle>
+     * Finally the ArrayList is returned
+     */
+    public ArrayList<Vehicle> csvToArrayList() {
 
         String[] array;
-        ArrayList<Vehicle> vehicleList = new ArrayList<Vehicle>();
+        ArrayList<Vehicle> vehicleArrayList = new ArrayList<Vehicle>();
         String absoluteFilePath = new File(filePath).getAbsolutePath();
-        String line = ""; // <- Diaxorizei thn kathe grammh sto CSV arxeio
+        String line;
 
-        //Epanalipsh gia na apothikevei se pinaka tis times apo to CSV
         try (BufferedReader br = new BufferedReader(new FileReader(absoluteFilePath))) {
-            while ((line = br.readLine()) != null) { // <- Epanalipsi oso yparxoun grammes sto CSV
-                array = line.split(";"); // <- use ; as separator
+            while ((line = br.readLine()) != null) {
+                array = line.split(";");
                 Vehicle vehicle = new Vehicle(array[0],array[1],array[2]);
-                vehicleList.add(vehicle);
+                vehicle.setStatus();
+                vehicleArrayList.add(vehicle);
             }
         }
-        // Aparaithto se periptosh pou dothei lathos hmeromhnia
         catch (IOException e) {
-            // Invalid date was entered
             e.printStackTrace();
         }
-        return vehicleList;
+        return vehicleArrayList;
     }
 }
